@@ -22,11 +22,13 @@ fprintf("first_3_mean=%f\n",t1_2_first_3_mean);
 %% Task 1.3 Compute the truncated mean
 fprintf("Task 1.3\n");
 % Assume prior: encoder_x is U(21, 30)
+x_min = 21;
+x_max = 30;
 % Define prior distribution
 % I assume this means throw away any data outside of this range?
 
 % Filter out values outside of 21deg to 30deg
-t1_3_encoder_x_is_in_range = (21 <= encoder_x) & (encoder_x <= 30);
+t1_3_encoder_x_is_in_range = (x_min <= encoder_x) & (encoder_x <= x_max);
 t1_3_in_range_encoder_x = encoder_x(t1_3_encoder_x_is_in_range);
 
 % Compute the truncated means
