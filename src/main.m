@@ -8,7 +8,7 @@ noise_var = 9;
 
 %% Task 1.1 Load the data
 fprintf("Task 1.1\n");
-encoder_x = load(".\files\encoder.mat").encoder;
+encoder_x = load_data();
 n_measurements_setup1=length(encoder_x); % full measurement
 n_measurements_setup2=3; % first 3 measurement
 
