@@ -10,4 +10,3 @@ integrand = @(x_) likelihood_pdf(x_) .* x_pdf(x_);
 bot = integral(integrand, -inf, inf, Waypoints=integral_waypoints);
 posterior_pdf = @(x) top(x) / bot;
 end
-

@@ -45,7 +45,6 @@ fprintf("Task 1.4\n");
 % Define x prior
 uniform_x_pdf = @(x) ((x_min <= x) & (x <= x_max))/(x_max - x_min);
 likelihood_pdf = dataset_likelihood_pdf_factory(encoder_x, noise_var);
-posterior_pdf = posterior_pdf_factory(likelihood_pdf, uniform_x_pdf);
 
 % Calculate MMSE
 t1_4_full_mmse = MMSE_atomic(uniform_x_pdf, encoder_x, noise_var, [x_min, x_max]);
