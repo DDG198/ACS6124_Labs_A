@@ -42,13 +42,15 @@ fprintf("first_3_mean=%f\n",t1_3_first_3_mean);
 %% Task 1.4
 fprintf("Task 1.4\n");
 
+% Define x prior
+uniform_x_pdf = @(x) ((x_min <= x) & (x <= x_max))/(x_max - x_min);
+likelihood_pdf = dataset_likelihood_pdf_factory(encoder_x, noise_var);
+posterior_pdf = posterior_pdf_factory(likelihood_pdf, uniform_x_pdf);
+
 % Calculate MMSE
-t1_4_full_mmse = MMSE(encoder_x, noise_var, x_min, x_max);
-t1_4_first_3_mmse = MMSE(encoder_x(1:n_measurements_setup2), noise_var, x_min, x_max);
+t1_4_full_mmse = MMSE_atomic(uniform_x_pdf, encoder_x, noise_var, [x_min, x_max]);
+t1_4_first_3_mmse = MMSE_atomic(uniform_x_pdf, encoder_x(1:n_measurements_setup2), noise_var, [x_min, x_max]);
 
 % Print results
 fprintf("full_mmse=%f\n",t1_4_full_mmse);
 fprintf("first_3_mmse=%f\n",t1_4_first_3_mmse);
-
-
-
