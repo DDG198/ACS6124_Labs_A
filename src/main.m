@@ -61,11 +61,12 @@ fprintf("Task 1.5\n");
 % Define x prior
 x_mean = 25;
 x_var = 2;
-gaussian_x_pdf = gaussian_pdf(x_mean, x_var);
+
+mmse_from_dataset = @(Y) MMSE_simple_gaussian(mean(Y), noise_var/length(Y), x_mean, x_var);
 
 % Calculate MMSE
-t1_5_full_mmse = MMSE_atomic(gaussian_x_pdf, encoder_x, noise_var, x_mean);
-t1_5_first_3_mmse = MMSE_atomic(gaussian_x_pdf, encoder_x(1:n_measurements_setup2), noise_var, x_mean);
+t1_5_full_mmse = mmse_from_dataset(encoder_x);
+t1_5_first_3_mmse = mmse_from_dataset(encoder_x(1:n_measurements_setup2));
 
 % Print results
 fprintf("full_mmse=%f\n",t1_5_full_mmse);
