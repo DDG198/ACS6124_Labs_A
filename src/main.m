@@ -28,8 +28,9 @@ x_max = 30;
 % I assume this means throw away any data outside of this range?
 
 % Filter out values outside of 21deg to 30deg
-t1_3_encoder_x_is_in_range = (x_min <= encoder_x) & (encoder_x <= x_max);
-t1_3_in_range_encoder_x = encoder_x(t1_3_encoder_x_is_in_range);
+t1_3_truncated_encoder_x(x_min <= encoder_x) = x_min;
+t1_3_truncated_encoder_x(encoder_x <= x_max) = x_max;
+t1_3_in_range_encoder_x = encoder_x(t1_3_truncated_encoder_x);
 
 % Compute the truncated means
 t1_3_full_mean = mean(t1_3_in_range_encoder_x);
@@ -45,7 +46,6 @@ fprintf("Task 1.4\n");
 % Define x prior
 uniform_x_pdf = @(x) ((x_min <= x) & (x <= x_max))/(x_max - x_min);
 likelihood_pdf = dataset_likelihood_pdf_factory(encoder_x, noise_var);
-posterior_pdf = posterior_pdf_factory(likelihood_pdf, uniform_x_pdf);
 
 % Calculate MMSE
 t1_4_full_mmse = MMSE_atomic(uniform_x_pdf, encoder_x, noise_var, [x_min, x_max]);
