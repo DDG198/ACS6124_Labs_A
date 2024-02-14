@@ -54,3 +54,19 @@ t1_4_first_3_mmse = MMSE_atomic(uniform_x_pdf, encoder_x(1:n_measurements_setup2
 % Print results
 fprintf("full_mmse=%f\n",t1_4_full_mmse);
 fprintf("first_3_mmse=%f\n",t1_4_first_3_mmse);
+
+%% Task 1.5
+fprintf("Task 1.5\n");
+
+% Define x prior
+x_mean = 25;
+x_var = 2;
+gaussian_x_pdf = gaussian_pdf(x_mean, x_var);
+
+% Calculate MMSE
+t1_5_full_mmse = MMSE_atomic(gaussian_x_pdf, encoder_x, noise_var, x_mean);
+t1_5_first_3_mmse = MMSE_atomic(gaussian_x_pdf, encoder_x(1:n_measurements_setup2), noise_var, x_mean);
+
+% Print results
+fprintf("full_mmse=%f\n",t1_5_full_mmse);
+fprintf("first_3_mmse=%f\n",t1_5_first_3_mmse);
