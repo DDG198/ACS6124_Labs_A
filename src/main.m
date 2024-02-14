@@ -26,8 +26,9 @@ fprintf("Task 1.3\n");
 % I assume this means throw away any data outside of this range?
 
 % Filter out values outside of 21deg to 30deg
-t1_3_encoder_x_is_in_range = (21 <= encoder_x) & (encoder_x <= 30);
-t1_3_in_range_encoder_x = encoder_x(t1_3_encoder_x_is_in_range);
+t1_3_truncated_encoder_x(x_min <= encoder_x) = x_min;
+t1_3_truncated_encoder_x(encoder_x <= x_max) = x_max;
+t1_3_in_range_encoder_x = encoder_x(t1_3_truncated_encoder_x);
 
 % Compute the truncated means
 t1_3_full_mean = mean(t1_3_in_range_encoder_x);
